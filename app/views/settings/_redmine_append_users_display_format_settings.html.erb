@@ -1,0 +1,67 @@
+<% label = 'redmine_append_users_display_format_label_' -%>
+<p>
+  <table>
+
+<% setting_name = 'users_custom_fields_name_of_department' -%>
+    <tr>
+      <td> 
+        <%= h t label + setting_name -%>
+      </td>
+      <td>
+        <%= text_field_tag("settings[#{setting_name}]", @settings[setting_name])%>
+      </td>
+    </tr>
+
+
+<% setting_name = 'string_before_login' -%>
+    <tr>
+      <td> 
+        <%= h t label + setting_name -%>
+      </td>
+      <td>
+        <%= text_field_tag("settings[#{setting_name}]", @settings[setting_name])%>
+      </td>
+    </tr>
+
+<% setting_name = 'string_after_login' -%>
+    <tr>
+      <td> 
+        <%= h t label + setting_name -%>
+      </td>
+      <td>
+        <%= text_field_tag("settings[#{setting_name}]", @settings[setting_name])%>
+      </td>
+    </tr>
+
+<% setting_name = 'string_before_department' -%>
+    <tr>
+      <td> 
+        <%= h t label + setting_name -%>
+      </td>
+      <td>
+        <%= text_field_tag("settings[#{setting_name}]", @settings[setting_name])%>
+      </td>
+    </tr>
+
+<% setting_name = 'string_after_department' -%>
+    <tr>
+      <td> 
+        <%= h t label + setting_name -%>
+      </td>
+      <td>
+        <%= text_field_tag("settings[#{setting_name}]", @settings[setting_name])%>
+      </td>
+    </tr>
+
+<% setting_name = 'independent_indication' -%>
+    <tr>
+      <td> 
+        <%= h t label + setting_name -%>
+      </td>
+      <td>
+        <%= text_field_tag("settings[#{setting_name}]", @settings[setting_name])%>
+      </td>
+    </tr>
+
+  </table>
+</p>
