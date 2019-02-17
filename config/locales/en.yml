@@ -1,8 +1,10 @@
 # English strings go here for Rails i18n
 en:
-  redmine_append_users_display_format_label_users_custom_fields_name_of_department: "Users custom fields name of department"
+  redmine_append_users_display_format_label_users_custom_fields_name_of_affiliation: "Users custom field name of affiliation"
   redmine_append_users_display_format_label_string_before_login: "String before login"
   redmine_append_users_display_format_label_string_after_login: "String after login"
-  redmine_append_users_display_format_label_string_before_department: "String before department"
-  redmine_append_users_display_format_label_string_after_department: "String after department"
-  redmine_append_users_display_format_label_independent_indication: "Independent indication"
+  redmine_append_users_display_format_label_string_before_affiliation: "String before affiliation"
+  redmine_append_users_display_format_label_string_after_affiliation: "String after affiliation"
+  redmine_append_users_display_format_label_string_before_abbreviated_firstname: "String before abbreviated firstname"
+  redmine_append_users_display_format_label_string_after_abbreviated_firstname: "String after abbreviated firstname"
+  redmine_append_users_display_format_label_independent_affiliation: "Display of independent affiliation"

@@ -1,18 +1,19 @@
 # Redmine Append Users Display Format plugin
 
-This is the Redmine(Project manage system) plug-in which the users display format is appended.
+This is the Redmine (Project manage system) plug-in which the users display format is appended.
 
-It's possible to users custom field of department is used for the user's indication.
+It can use users custom field of affiliation for users display.
 
 The last 4 of the users display format choices are for Japanese.
 
 ## Version
 
-0.0.1
+0.0.2
 
 ## Environment
 
-Redmine 3.1.1
+* Redmine 3.4
+* Ruby 2.0 or higher
 
 ## Installation
 
