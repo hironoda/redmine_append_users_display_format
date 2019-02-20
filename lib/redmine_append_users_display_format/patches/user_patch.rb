@@ -235,7 +235,12 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
 
   def affiliation
     return @affiliation if @affiliation
-    @affiliation = nil
+    @affiliation = get_affiliation
+    @affiliation = I18n.t :redmine_append_users_display_format_label_affiliation if @force_affiliation && @affiliation.empty?
+    @affiliation
+  end
+
+  def get_affiliation
     return '' unless exist_affiliation_users_custom_field
     custom_values = CustomValue.
                      joins(:custom_field).
@@ -245,7 +250,7 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
                      where(["#{CustomField.table_name}.name = ?", self.class.users_custom_field_name_of_affiliation])
     custom_value = custom_values.first
     return self.class.independent_affiliation if custom_values.length != 1 or custom_value[:value].to_s.empty?
-    @affiliation = custom_value[:value]
+    return custom_value[:value]
   end
 
   def exist_affiliation_users_custom_field
@@ -254,7 +259,7 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
       UserCustomField.where(name: self.class.users_custom_field_name_of_affiliation).count == 1
   end
 
-  private :exist_affiliation_users_custom_field
+  private :get_affiliation, :exist_affiliation_users_custom_field
 
   # 名前の略称
   # * Redmineに同じ姓のユーザーが存在しない場合、空白を返す
@@ -279,6 +284,7 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
     c = caller[0].to_s.split(':')
     @force_abbreviated_firstname = 
       (c.length == 3 && File.basename(c[0]) == 'settings_controller.rb' && c[2].include?('edit'))
+    @force_affiliation = @force_abbreviated_firstname
     super(formatter).strip
   end
 

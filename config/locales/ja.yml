@@ -8,3 +8,4 @@ ja:
   redmine_append_users_display_format_label_string_before_abbreviated_firstname: "名の1文字目の前の文字列"
   redmine_append_users_display_format_label_string_after_abbreviated_firstname: "名の1文字目の後の文字列"
   redmine_append_users_display_format_label_independent_affiliation: "無所属の表示"
+  redmine_append_users_display_format_label_affiliation: "所属"

@@ -8,3 +8,4 @@ en:
   redmine_append_users_display_format_label_string_before_abbreviated_firstname: "String before abbreviated firstname"
   redmine_append_users_display_format_label_string_after_abbreviated_firstname: "String after abbreviated firstname"
   redmine_append_users_display_format_label_independent_affiliation: "Display of independent affiliation"
+  redmine_append_users_display_format_label_affiliation: "Affiliation"
