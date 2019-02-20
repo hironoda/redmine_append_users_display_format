@@ -1,6 +1,6 @@
 # English strings go here for Rails i18n
 en:
-  redmine_append_users_display_format_label_users_custom_fields_name_of_affiliation: "Users custom field name of affiliation"
+  redmine_append_users_display_format_label_users_custom_field_name_of_affiliation: "Users custom field name of affiliation"
   redmine_append_users_display_format_label_string_before_login: "String before login"
   redmine_append_users_display_format_label_string_after_login: "String after login"
   redmine_append_users_display_format_label_string_before_affiliation: "String before affiliation"

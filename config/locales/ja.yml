@@ -1,6 +1,6 @@
 # Japanese strings go here for Rails i18n
 ja:
-  redmine_append_users_display_format_label_users_custom_fields_name_of_affiliation: "所属のユーザーカスタムフィールド名称"
+  redmine_append_users_display_format_label_users_custom_field_name_of_affiliation: "所属のユーザーカスタムフィールド名称"
   redmine_append_users_display_format_label_string_before_login: "ログインIDの前の文字列"
   redmine_append_users_display_format_label_string_after_login: "ログインIDの後の文字列"
   redmine_append_users_display_format_label_string_before_affiliation: "所属の前の文字列"

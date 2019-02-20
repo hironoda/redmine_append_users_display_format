@@ -20,102 +20,157 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
         :username_firstinitial_lastname => {
             :string => '#{User.format_login(login)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
             :order => %w(login firstname lastname id),
-            :setting_order => 102
+            :setting_order => 103
           },
         :username_firstname => {
             :string => '#{User.format_login(login)}#{firstname}',
             :order => %w(login firstname id),
-            :setting_order => 103
+            :setting_order => 104
           },
         :username_lastname_firstname => {
             :string => '#{User.format_login(login)}#{lastname} #{firstname}',
             :order => %w(login lastname firstname id),
-            :setting_order => 104
+            :setting_order => 105
+          },
+        :username_lastnamefirstname => {
+            :string => '#{User.format_login(login)}#{lastname}#{firstname}',
+            :order => %w(login lastname firstname id),
+            :setting_order => 106
           },
         :username_lastname_coma_firstname => {
             :string => '#{User.format_login(login)}#{lastname}, #{firstname}',
             :order => %w(login lastname firstname id),
-            :setting_order => 105
+            :setting_order => 107
           },
         :username_lastname => {
             :string => '#{User.format_login(login)}#{lastname}',
             :order => %w(login lastname id),
-            :setting_order => 106
+            :setting_order => 108
           },
         :affiliation_firstname_lastname => {
             :string => '#{User.format_affiliation(affiliation)}#{firstname} #{lastname}',
-            :order => %w(firstname lastname id),
+            :order => %w(affiliation firstname lastname id),
             :setting_order => 201
           },
         :affiliation_firstname_lastinitial => {
             :string => '#{User.format_affiliation(affiliation)}#{firstname} #{lastname.to_s.chars.first}.',
-            :order => %w(firstname lastname id),
+            :order => %w(affiliation firstname lastname id),
             :setting_order => 202
           },
         :affiliation_firstinitial_lastname => {
             :string => '#{User.format_affiliation(affiliation)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
-            :order => %w(firstname lastname id),
-            :setting_order => 202
+            :order => %w(affiliation firstname lastname id),
+            :setting_order => 203
           },
         :affiliation_firstname => {
             :string => '#{User.format_affiliation(affiliation)}#{firstname}',
-            :order => %w(firstname id),
-            :setting_order => 203
+            :order => %w(affiliation firstname id),
+            :setting_order => 204
           },
         :affiliation_lastname_firstname => {
             :string => '#{User.format_affiliation(affiliation)}#{lastname} #{firstname}',
-            :order => %w(lastname firstname id),
-            :setting_order => 204
+            :order => %w(affiliation lastname firstname id),
+            :setting_order => 205
+          },
+        :affiliation_lastnamefirstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{lastname}#{firstname}',
+            :order => %w(affiliation lastname firstname id),
+            :setting_order => 206
           },
         :affiliation_lastname_coma_firstname => {
             :string => '#{User.format_affiliation(affiliation)}#{lastname}, #{firstname}',
-            :order => %w(lastname firstname id),
-            :setting_order => 205
+            :order => %w(affiliation lastname firstname id),
+            :setting_order => 207
           },
         :affiliation_lastname => {
             :string => '#{User.format_affiliation(affiliation)}#{lastname}',
-            :order => %w(lastname id),
-            :setting_order => 206
+            :order => %w(affiliation lastname id),
+            :setting_order => 208
           },
         :affiliation_username => {
             :string => '#{User.format_affiliation(affiliation)}#{login}',
-            :order => %w(login id),
-            :setting_order => 207
+            :order => %w(affiliation login id),
+            :setting_order => 209
+          },
+        :username_affiliation_firstname_lastname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{firstname} #{lastname}',
+            :order => %w(login affiliation firstname lastname id),
+            :setting_order => 301
+          },
+        :username_affiliation_firstname_lastinitial => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{firstname} #{lastname.to_s.chars.first}.',
+            :order => %w(login affiliation firstname lastname id),
+            :setting_order => 302
+          },
+        :username_affiliation_firstinitial_lastname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
+            :order => %w(login affiliation firstname lastname id),
+            :setting_order => 303
+          },
+        :username_affiliation_firstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{firstname}',
+            :order => %w(login affiliation firstname id),
+            :setting_order => 304
+          },
+        :username_affiliation_lastname_firstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname} #{firstname}',
+            :order => %w(login affiliation lastname firstname id),
+            :setting_order => 305
+          },
+        :username_affiliation_lastnamefirstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname}#{firstname}',
+            :order => %w(login affiliation lastname firstname id),
+            :setting_order => 306
+          },
+        :username_affiliation_lastname_coma_firstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname}, #{firstname}',
+            :order => %w(login affiliation lastname firstname id),
+            :setting_order => 307
+          },
+        :username_affiliation_lastname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname}',
+            :order => %w(login affiliation lastname id),
+            :setting_order => 308
           },
         :affiliation_username_firstname_lastname => {
             :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{firstname} #{lastname}',
-            :order => %w(login firstname lastname id),
-            :setting_order => 301
+            :order => %w(affiliation login firstname lastname id),
+            :setting_order => 401
           },
         :affiliation_username_firstname_lastinitial => {
             :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{firstname} #{lastname.to_s.chars.first}.',
-            :order => %w(login firstname lastname id),
-            :setting_order => 302
+            :order => %w(affiliation login firstname lastname id),
+            :setting_order => 402
           },
         :affiliation_username_firstinitial_lastname => {
             :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
-            :order => %w(login firstname lastname id),
-            :setting_order => 302
+            :order => %w(affiliation login firstname lastname id),
+            :setting_order => 403
           },
         :affiliation_username_firstname => {
             :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{firstname}',
-            :order => %w(login firstname id),
-            :setting_order => 303
+            :order => %w(affiliation login firstname id),
+            :setting_order => 404
           },
         :affiliation_username_lastname_firstname => {
             :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname} #{firstname}',
-            :order => %w(login lastname firstname id),
-            :setting_order => 304
+            :order => %w(affiliation login lastname firstname id),
+            :setting_order => 405
+          },
+        :affiliation_username_lastnamefirstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname}#{firstname}',
+            :order => %w(affiliation login lastname firstname id),
+            :setting_order => 406
           },
         :affiliation_username_lastname_coma_firstname => {
             :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname}, #{firstname}',
-            :order => %w(login lastname firstname id),
-            :setting_order => 305
+            :order => %w(affiliation login lastname firstname id),
+            :setting_order => 407
           },
         :affiliation_username_lastname => {
             :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname}',
-            :order => %w(login lastname id),
-            :setting_order => 306
+            :order => %w(affiliation login lastname id),
+            :setting_order => 408
           },
         :lastname_abbreviated_firstname => {
             :string => '#{lastname}#{abbreviated_firstname}',
@@ -129,13 +184,18 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
           },
         :affiliation_lastname_abbreviated_firstname => {
             :string => '#{User.format_affiliation(affiliation)}#{lastname}#{abbreviated_firstname}',
-            :order => %w(lastname firstname id),
+            :order => %w(affiliation lastname firstname id),
             :setting_order => 2003
+          },
+        :username_affiliation_lastname_abbreviated_firstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname}#{abbreviated_firstname}',
+            :order => %w(login affiliation lastname firstname id),
+            :setting_order => 2004
           },
         :affiliation_username_lastname_abbreviated_firstname => {
             :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname}#{abbreviated_firstname}',
-            :order => %w(login lastname firstname id),
-            :setting_order => 2004
+            :order => %w(affiliation login lastname firstname id),
+            :setting_order => 2005
           },
       }.merge(remove_const :USER_FORMATS)
     end
@@ -143,8 +203,8 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
 
   module ClassMethods
 
-    def users_custom_fields_name_of_affiliation
-      Setting.plugin_redmine_append_users_display_format['users_custom_fields_name_of_affiliation'].to_s
+    def users_custom_field_name_of_affiliation
+      Setting.plugin_redmine_append_users_display_format['users_custom_field_name_of_affiliation'].to_s
     end
 
     def independent_affiliation
@@ -182,7 +242,7 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
                      where(["#{CustomValue.table_name}.customized_id = ?", self.id]).
                      where(["#{CustomValue.table_name}.customized_type = ?", 'Principal']).
                      where(["#{CustomField.table_name}.type = ?", 'UserCustomField']).
-                     where(["#{CustomField.table_name}.name = ?", self.class.users_custom_fields_name_of_affiliation])
+                     where(["#{CustomField.table_name}.name = ?", self.class.users_custom_field_name_of_affiliation])
     custom_value = custom_values.first
     return self.class.independent_affiliation if custom_values.length != 1 or custom_value[:value].to_s.empty?
     @affiliation = custom_value[:value]
@@ -190,8 +250,8 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
 
   def exist_affiliation_users_custom_field
     @exist_affiliation_users_custom_field ||=
-      ! self.class.users_custom_fields_name_of_affiliation.empty? &&
-      UserCustomField.where(name: self.class.users_custom_fields_name_of_affiliation).count == 1
+      ! self.class.users_custom_field_name_of_affiliation.empty? &&
+      UserCustomField.where(name: self.class.users_custom_field_name_of_affiliation).count == 1
   end
 
   private :exist_affiliation_users_custom_field
@@ -203,15 +263,23 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
   #   * 名前の1文字目が同じユーザーが存在する場合、諦めて「名前」を返す
   def abbreviated_firstname
     return @abbreviated_firstname if @abbreviated_firstname
-    u = User
-    return @abbreviated_firstname = '' if u.where(lastname: self[:lastname]).count == 1
     before = Setting.plugin_redmine_append_users_display_format['string_before_abbreviated_firstname'].to_s
     after  = Setting.plugin_redmine_append_users_display_format['string_after_abbreviated_firstname'].to_s
+    return @abbreviated_firstname = "#{before}#{self[:firstname][0]}#{after}" if @force_abbreviated_firstname
+    u = User
+    return @abbreviated_firstname = '' if u.where(lastname: self[:lastname]).count == 1
     return @abbreviated_firstname = "#{before}#{self[:firstname][0]}#{after}" if
       u.
       where(lastname: self[:lastname]).
       where(u.arel_table[:firstname].matches("#{self[:firstname][0]}%")).count == 1
     @abbreviated_firstname = " #{self[:firstname]}"
+  end
+
+  def name(formatter = nil)
+    c = caller[0].to_s.split(':')
+    @force_abbreviated_firstname = 
+      (c.length == 3 && File.basename(c[0]) == 'settings_controller.rb' && c[2].include?('edit'))
+    super(formatter).strip
   end
 
 end
