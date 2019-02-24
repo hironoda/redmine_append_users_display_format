@@ -233,6 +233,15 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
 
   end
 
+  def reload(*args)
+    @affiliation = nil
+    @exist_affiliation_users_custom_field = nil
+    @abbreviated_firstname = nil
+    @force_abbreviated_firstname = nil
+    @force_affiliation = nil
+    super(*args)
+  end
+
   def affiliation
     return @affiliation if @affiliation
     @affiliation = get_affiliation

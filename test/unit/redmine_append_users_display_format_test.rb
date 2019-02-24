@@ -69,12 +69,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
 
     testcases = [
@@ -88,12 +83,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
 
     testcases = [
@@ -107,12 +97,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
   end
 
@@ -128,12 +113,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
 
     testcases = [
@@ -145,12 +125,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
 
     testcases = [
@@ -162,12 +137,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
   end
 
@@ -183,12 +153,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
 
     testcases = [
@@ -200,12 +165,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
 
     testcases = [
@@ -217,12 +177,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 1, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
-    }
-    testcases.each{|t|
-      u = User.find(user_id)
-      assert_equal t[:name], u.name(t[:user_format]),
-                   "loop : 2, user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
     }
   end
 
