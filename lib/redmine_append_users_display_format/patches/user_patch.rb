@@ -3,7 +3,9 @@ require_dependency 'user'
 module RedmineAppendUsersDisplayFormat::Patches::UserPatch
 
   def self.prepended(base)
-    base.extend(ClassMethods)
+    class << base
+      self.prepend(ClassMethods)
+    end
     base.class_eval do
       const_set :USER_FORMATS,
       {
