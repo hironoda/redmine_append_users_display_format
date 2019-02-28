@@ -1,0 +1,11 @@
+--- 
+groups_users_001: 
+  group_id: 10
+  user_id: 6
+groups_users_002: 
+  group_id: 10
+  user_id: 5
+groups_users_003:
+  group_id: 10
+  user_id: 4
+

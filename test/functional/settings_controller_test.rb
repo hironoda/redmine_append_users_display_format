@@ -3,7 +3,10 @@ require File.expand_path('../../test_helper', __FILE__)
 class SettingsControllerTest < Redmine::ControllerTest
   include Redmine::I18n
 
-  plugin_fixtures :users, :custom_fields, :custom_values
+  fixtures :projects, :trackers, :issue_statuses, :issues
+
+  plugin_fixtures :users, :user_preferences, :email_addresses,
+                  :custom_fields, :custom_values
 
   def setup
     User.current = nil

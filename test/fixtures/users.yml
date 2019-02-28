@@ -91,3 +91,38 @@ users_006:
   mail_notification: all
   login: nallan1
   type: User
+users_007:
+  created_on: 2019-01-01 00:00:00 +02:00
+  status: 3
+  last_login_on:
+  language: en
+  hashed_password: 1
+  updated_on: 2019-01-01 00:00:00 +02:00
+  admin: false
+  lastname: Henry
+  firstname: Lex
+  id: 7
+  auth_source_id:
+  mail_notification: all
+  login: lhenry1
+  type: User
+users_008:
+  created_on: 2019-01-01 00:00:00 +02:00
+  status: 1
+  last_login_on:
+  language: en
+  hashed_password: 1
+  updated_on: 2019-01-01 00:00:00 +02:00
+  admin: false
+  lastname: Henry
+  firstname: Lola
+  id: 8
+  auth_source_id:
+  mail_notification: all
+  login: lhenry2
+  type: User
+groups_010:
+  id: 10
+  lastname: A Team
+  type: Group
+  status: 1
