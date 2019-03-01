@@ -15,6 +15,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
 
   def test_user_display_format_users_custom_field_name_of_affiliation_department
     Setting.plugin_redmine_append_users_display_format['users_custom_field_name_of_affiliation'] = s = 'Department'
+    Setting.plugin_redmine_append_users_display_format['independent_affiliation'] = ia = 'Independent'
 
     testcases = [
       {user_format: :firstname_lastname,       name: 'John Smith'},
@@ -69,7 +70,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
 
     testcases = [
@@ -84,7 +85,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
 
     testcases = [
@@ -99,7 +100,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
 
     testcases = [
@@ -114,12 +115,13 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
   end
 
   def test_user_display_format_users_custom_field_name_of_affiliation_company
     Setting.plugin_redmine_append_users_display_format['users_custom_field_name_of_affiliation'] = s = 'Company'
+    Setting.plugin_redmine_append_users_display_format['independent_affiliation'] = ia = 'Independent'
 
     testcases = [
       {user_format: :affiliation_lastname_abbreviated_firstname,          name: 'Smith'},
@@ -130,7 +132,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
 
     testcases = [
@@ -142,7 +144,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
 
     testcases = [
@@ -154,12 +156,13 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
   end
 
   def test_user_display_format_users_custom_field_name_of_affiliation_blank
     Setting.plugin_redmine_append_users_display_format['users_custom_field_name_of_affiliation'] = s = ''
+    Setting.plugin_redmine_append_users_display_format['independent_affiliation'] = ia = 'Independent'
 
     testcases = [
       {user_format: :affiliation_lastname_abbreviated_firstname,          name: 'Smith'},
@@ -170,7 +173,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
 
     testcases = [
@@ -182,7 +185,7 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
 
     testcases = [
@@ -194,7 +197,57 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     u = User.find(user_id)
     testcases.each{|t|
       assert_equal t[:name], u.name(t[:user_format]),
-                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}"
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
+    }
+  end
+
+  def test_user_display_format_users_custom_field_independent_affiliation_blank
+    Setting.plugin_redmine_append_users_display_format['users_custom_field_name_of_affiliation'] = s = 'Department'
+    Setting.plugin_redmine_append_users_display_format['independent_affiliation'] = ia = ''
+
+    testcases = [
+      {user_format: :firstname_lastname,                                  name: 'John Smith'},
+      {user_format: :lastname_abbreviated_firstname,                      name: 'Smith'},
+      {user_format: :username_lastname_abbreviated_firstname,             name: '_jsmith : Smith'},
+      {user_format: :affiliation_lastname_abbreviated_firstname,          name: '[Development] Smith'},
+      {user_format: :username_affiliation_lastname_abbreviated_firstname, name: '_jsmith : [Development] Smith'},
+      {user_format: :affiliation_username_lastname_abbreviated_firstname, name: '[Development] _jsmith : Smith'},
+    ]
+    user_id = 2
+    u = User.find(user_id)
+    testcases.each{|t|
+      assert_equal t[:name], u.name(t[:user_format]),
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
+    }
+
+    testcases = [
+      {user_format: :firstname_lastname,                                  name: 'Daniel Thomson'},
+      {user_format: :lastname_abbreviated_firstname,                      name: 'Thomson(D)'},
+      {user_format: :username_lastname_abbreviated_firstname,             name: '_dthomson : Thomson(D)'},
+      {user_format: :affiliation_lastname_abbreviated_firstname,          name: 'Thomson(D)'},
+      {user_format: :username_affiliation_lastname_abbreviated_firstname, name: '_dthomson : Thomson(D)'},
+      {user_format: :affiliation_username_lastname_abbreviated_firstname, name: '_dthomson : Thomson(D)'},
+    ]
+    user_id = 3
+    u = User.find(user_id)
+    testcases.each{|t|
+      assert_equal t[:name], u.name(t[:user_format]),
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
+    }
+
+    testcases = [
+      {user_format: :firstname_lastname,                                  name: 'Nina Allan'},
+      {user_format: :lastname_abbreviated_firstname,                      name: 'Allan Nina'},
+      {user_format: :username_lastname_abbreviated_firstname,             name: '_nallan2 : Allan Nina'},
+      {user_format: :affiliation_lastname_abbreviated_firstname,          name: 'Allan Nina'},
+      {user_format: :username_affiliation_lastname_abbreviated_firstname, name: '_nallan2 : Allan Nina'},
+      {user_format: :affiliation_username_lastname_abbreviated_firstname, name: '_nallan2 : Allan Nina'},
+    ]
+    user_id = 4
+    u = User.find(user_id)
+    testcases.each{|t|
+      assert_equal t[:name], u.name(t[:user_format]),
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
     }
   end
 
