@@ -1,0 +1,16 @@
+--- 
+custom_fields_001: 
+  name: Department
+  regexp: ""
+  is_for_all: false
+  type: UserCustomField
+  possible_values: 
+  - Development
+  - Test
+  - Affairs
+  id: 1
+  is_required: false
+  field_format: list
+  default_value: ""
+  editable: true
+  position: 1

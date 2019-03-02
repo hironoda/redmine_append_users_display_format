@@ -1,8 +1,11 @@
 # Japanese strings go here for Rails i18n
 ja:
-  redmine_append_users_display_format_label_users_custom_fields_name_of_department: "部署のユーザーカスタムフィールド名称"
+  redmine_append_users_display_format_label_users_custom_field_name_of_affiliation: "所属のユーザーカスタムフィールド名称"
   redmine_append_users_display_format_label_string_before_login: "ログインIDの前の文字列"
   redmine_append_users_display_format_label_string_after_login: "ログインIDの後の文字列"
-  redmine_append_users_display_format_label_string_before_department: "部署の前の文字列"
-  redmine_append_users_display_format_label_string_after_department: "部署の後の文字列"
-  redmine_append_users_display_format_label_independent_indication: "無所属の表示"
+  redmine_append_users_display_format_label_string_before_affiliation: "所属の前の文字列"
+  redmine_append_users_display_format_label_string_after_affiliation: "所属の後の文字列"
+  redmine_append_users_display_format_label_string_before_abbreviated_firstname: "名の1文字目の前の文字列"
+  redmine_append_users_display_format_label_string_after_abbreviated_firstname: "名の1文字目の後の文字列"
+  redmine_append_users_display_format_label_independent_affiliation: "無所属の表示"
+  redmine_append_users_display_format_label_affiliation: "所属"

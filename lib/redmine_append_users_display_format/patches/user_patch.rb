@@ -2,13 +2,11 @@ require_dependency 'user'
 
 module RedmineAppendUsersDisplayFormat::Patches::UserPatch
 
-  def self.included(base)
-
-    base.extend(ClassMethods)
-    base.send(:include, InstanceMethods)
- 
+  def self.prepended(base)
+    class << base
+      self.prepend(ClassMethods)
+    end
     base.class_eval do
-
       const_set :USER_FORMATS,
       {
         :username_firstname_lastname => {
@@ -24,154 +22,210 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
         :username_firstinitial_lastname => {
             :string => '#{User.format_login(login)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
             :order => %w(login firstname lastname id),
-            :setting_order => 102
+            :setting_order => 103
           },
         :username_firstname => {
             :string => '#{User.format_login(login)}#{firstname}',
             :order => %w(login firstname id),
-            :setting_order => 103
+            :setting_order => 104
           },
         :username_lastname_firstname => {
             :string => '#{User.format_login(login)}#{lastname} #{firstname}',
             :order => %w(login lastname firstname id),
-            :setting_order => 104
+            :setting_order => 105
+          },
+        :username_lastnamefirstname => {
+            :string => '#{User.format_login(login)}#{lastname}#{firstname}',
+            :order => %w(login lastname firstname id),
+            :setting_order => 106
           },
         :username_lastname_coma_firstname => {
             :string => '#{User.format_login(login)}#{lastname}, #{firstname}',
             :order => %w(login lastname firstname id),
-            :setting_order => 105
+            :setting_order => 107
           },
         :username_lastname => {
             :string => '#{User.format_login(login)}#{lastname}',
             :order => %w(login lastname id),
-            :setting_order => 106
+            :setting_order => 108
           },
-        :department_firstname_lastname => {
-            :string => '#{User.format_department(department)}#{firstname} #{lastname}',
+        :affiliation_firstname_lastname => {
+            :string => '#{User.format_affiliation(affiliation)}#{firstname} #{lastname}',
             :order => %w(firstname lastname id),
             :setting_order => 201
           },
-        :department_firstname_lastinitial => {
-            :string => '#{User.format_department(department)}#{firstname} #{lastname.to_s.chars.first}.',
+        :affiliation_firstname_lastinitial => {
+            :string => '#{User.format_affiliation(affiliation)}#{firstname} #{lastname.to_s.chars.first}.',
             :order => %w(firstname lastname id),
             :setting_order => 202
           },
-        :department_firstinitial_lastname => {
-            :string => '#{User.format_department(department)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
+        :affiliation_firstinitial_lastname => {
+            :string => '#{User.format_affiliation(affiliation)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
             :order => %w(firstname lastname id),
-            :setting_order => 202
-          },
-        :department_firstname => {
-            :string => '#{User.format_department(department)}#{firstname}',
-            :order => %w(firstname id),
             :setting_order => 203
           },
-        :department_lastname_firstname => {
-            :string => '#{User.format_department(department)}#{lastname} #{firstname}',
-            :order => %w(lastname firstname id),
+        :affiliation_firstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{firstname}',
+            :order => %w(firstname id),
             :setting_order => 204
           },
-        :department_lastname_coma_firstname => {
-            :string => '#{User.format_department(department)}#{lastname}, #{firstname}',
+        :affiliation_lastname_firstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{lastname} #{firstname}',
             :order => %w(lastname firstname id),
             :setting_order => 205
           },
-        :department_lastname => {
-            :string => '#{User.format_department(department)}#{lastname}',
-            :order => %w(lastname id),
+        :affiliation_lastnamefirstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{lastname}#{firstname}',
+            :order => %w(lastname firstname id),
             :setting_order => 206
           },
-        :department_username => {
-            :string => '#{User.format_department(department)}#{login}',
-            :order => %w(login id),
+        :affiliation_lastname_coma_firstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{lastname}, #{firstname}',
+            :order => %w(lastname firstname id),
             :setting_order => 207
           },
-        :department_username_firstname_lastname => {
-            :string => '#{User.format_department(department)}#{User.format_login(login)}#{firstname} #{lastname}',
+        :affiliation_lastname => {
+            :string => '#{User.format_affiliation(affiliation)}#{lastname}',
+            :order => %w(lastname id),
+            :setting_order => 208
+          },
+        :affiliation_username => {
+            :string => '#{User.format_affiliation(affiliation)}#{login}',
+            :order => %w(login id),
+            :setting_order => 209
+          },
+        :username_affiliation_firstname_lastname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{firstname} #{lastname}',
             :order => %w(login firstname lastname id),
             :setting_order => 301
           },
-        :department_username_firstname_lastinitial => {
-            :string => '#{User.format_department(department)}#{User.format_login(login)}#{firstname} #{lastname.to_s.chars.first}.',
+        :username_affiliation_firstname_lastinitial => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{firstname} #{lastname.to_s.chars.first}.',
             :order => %w(login firstname lastname id),
             :setting_order => 302
           },
-        :department_username_firstinitial_lastname => {
-            :string => '#{User.format_department(department)}#{User.format_login(login)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
+        :username_affiliation_firstinitial_lastname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
             :order => %w(login firstname lastname id),
-            :setting_order => 302
-          },
-        :department_username_firstname => {
-            :string => '#{User.format_department(department)}#{User.format_login(login)}#{firstname}',
-            :order => %w(login firstname id),
             :setting_order => 303
           },
-        :department_username_lastname_firstname => {
-            :string => '#{User.format_department(department)}#{User.format_login(login)}#{lastname} #{firstname}',
-            :order => %w(login lastname firstname id),
+        :username_affiliation_firstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{firstname}',
+            :order => %w(login firstname id),
             :setting_order => 304
           },
-        :department_username_lastname_coma_firstname => {
-            :string => '#{User.format_department(department)}#{User.format_login(login)}#{lastname}, #{firstname}',
+        :username_affiliation_lastname_firstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname} #{firstname}',
             :order => %w(login lastname firstname id),
             :setting_order => 305
           },
-        :department_username_lastname => {
-            :string => '#{User.format_department(department)}#{User.format_login(login)}#{lastname}',
-            :order => %w(login lastname id),
+        :username_affiliation_lastnamefirstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname}#{firstname}',
+            :order => %w(login lastname firstname id),
             :setting_order => 306
           },
-        :lastname_abbreviatedfirstname => {
-            :string => '#{lastname}#{abbreviatedfirstname}',
+        :username_affiliation_lastname_coma_firstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname}, #{firstname}',
+            :order => %w(login lastname firstname id),
+            :setting_order => 307
+          },
+        :username_affiliation_lastname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname}',
+            :order => %w(login lastname id),
+            :setting_order => 308
+          },
+        :affiliation_username_firstname_lastname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{firstname} #{lastname}',
+            :order => %w(login firstname lastname id),
+            :setting_order => 401
+          },
+        :affiliation_username_firstname_lastinitial => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{firstname} #{lastname.to_s.chars.first}.',
+            :order => %w(login firstname lastname id),
+            :setting_order => 402
+          },
+        :affiliation_username_firstinitial_lastname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{firstname.to_s.gsub(/(([[:alpha:]])[[:alpha:]]*\.?)/, \'\2.\')} #{lastname}',
+            :order => %w(login firstname lastname id),
+            :setting_order => 403
+          },
+        :affiliation_username_firstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{firstname}',
+            :order => %w(login firstname id),
+            :setting_order => 404
+          },
+        :affiliation_username_lastname_firstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname} #{firstname}',
+            :order => %w(login lastname firstname id),
+            :setting_order => 405
+          },
+        :affiliation_username_lastnamefirstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname}#{firstname}',
+            :order => %w(login lastname firstname id),
+            :setting_order => 406
+          },
+        :affiliation_username_lastname_coma_firstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname}, #{firstname}',
+            :order => %w(login lastname firstname id),
+            :setting_order => 407
+          },
+        :affiliation_username_lastname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname}',
+            :order => %w(login lastname id),
+            :setting_order => 408
+          },
+        :lastname_abbreviated_firstname => {
+            :string => '#{lastname}#{abbreviated_firstname}',
             :order => %w(lastname firstname id),
             :setting_order => 2001
           },
-        :username_lastname_abbreviatedfirstname => {
-            :string => '#{User.format_login(login)}#{lastname}#{abbreviatedfirstname}',
+        :username_lastname_abbreviated_firstname => {
+            :string => '#{User.format_login(login)}#{lastname}#{abbreviated_firstname}',
             :order => %w(login lastname firstname id),
             :setting_order => 2002
           },
-        :department_lastname_abbreviatedfirstname => {
-            :string => '#{User.format_department(department)}#{lastname}#{abbreviatedfirstname}',
+        :affiliation_lastname_abbreviated_firstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{lastname}#{abbreviated_firstname}',
             :order => %w(lastname firstname id),
             :setting_order => 2003
           },
-        :department_username_lastname_abbreviatedfirstname => {
-            :string => '#{User.format_department(department)}#{User.format_login(login)}#{lastname}#{abbreviatedfirstname}',
+        :username_affiliation_lastname_abbreviated_firstname => {
+            :string => '#{User.format_login(login)}#{User.format_affiliation(affiliation)}#{lastname}#{abbreviated_firstname}',
             :order => %w(login lastname firstname id),
             :setting_order => 2004
           },
+        :affiliation_username_lastname_abbreviated_firstname => {
+            :string => '#{User.format_affiliation(affiliation)}#{User.format_login(login)}#{lastname}#{abbreviated_firstname}',
+            :order => %w(login lastname firstname id),
+            :setting_order => 2005
+          },
       }.merge(remove_const :USER_FORMATS)
-
-      private :exist_department_users_custom_field
-
     end
-
   end
 
   module ClassMethods
 
-    def users_custom_fields_name_of_department
-      Setting.plugin_redmine_append_users_display_format[:users_custom_fields_name_of_department].to_s
+    def users_custom_field_name_of_affiliation
+      Setting.plugin_redmine_append_users_display_format['users_custom_field_name_of_affiliation'].to_s
     end
 
-    def independent_indication
-      Setting.plugin_redmine_append_users_display_format[:independent_indication].to_s
+    def independent_affiliation
+      Setting.plugin_redmine_append_users_display_format['independent_affiliation'].to_s
     end
 
     def format_login(login)
-      before = Setting.plugin_redmine_append_users_display_format[:string_before_login].to_s
-      after  = Setting.plugin_redmine_append_users_display_format[:string_after_login].to_s
-      format_login_department login, before, after
+      before = Setting.plugin_redmine_append_users_display_format['string_before_login'].to_s
+      after  = Setting.plugin_redmine_append_users_display_format['string_after_login'].to_s
+      append_users_display_format_join_before_after_strings login, before, after
     end
 
-    def format_department(department)
-      before = Setting.plugin_redmine_append_users_display_format[:string_before_department].to_s
-      after  = Setting.plugin_redmine_append_users_display_format[:string_after_department].to_s
-      format_login_department department, before, after
+    def format_affiliation(affiliation)
+      before = Setting.plugin_redmine_append_users_display_format['string_before_affiliation'].to_s
+      after  = Setting.plugin_redmine_append_users_display_format['string_after_affiliation'].to_s
+      append_users_display_format_join_before_after_strings affiliation, before, after
     end
 
-    def format_login_department(string, before, after)
+    def append_users_display_format_join_before_after_strings(string, before, after)
       s = String.new
       return s if not string or string.empty?
       after = ' ' if after.empty?
@@ -181,46 +235,74 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
 
   end
 
-  module InstanceMethods
+  def reload(*args)
+    @affiliation = nil
+    @exist_affiliation_users_custom_field = nil
+    @abbreviated_firstname = nil
+    @force_abbreviated_firstname = nil
+    @force_affiliation = nil
+    super(*args)
+  end
 
-    def department
-      return @department if @department
-      @department = nil
-      return '' unless exist_department_users_custom_field
-      custom_values = CustomValue.
-                       joins(:custom_field).
-                       where(["#{CustomValue.table_name}.customized_id = ?", self.id]).
-                       where(["#{CustomValue.table_name}.customized_type = ?", 'Principal']).
-                       where(["#{CustomField.table_name}.type = ?", 'UserCustomField']).
-                       where(["#{CustomField.table_name}.name = ?", self.class.users_custom_fields_name_of_department])
-      custom_value = custom_values.first
-      return self.class.independent_indication if custom_values.length != 1 or custom_value[:value].to_s.empty?
-      @department = custom_value[:value]
-    end
+  def affiliation
+    return @affiliation if @affiliation
+    @affiliation = get_affiliation
+    @affiliation = I18n.t :redmine_append_users_display_format_label_affiliation if @force_affiliation && @affiliation.empty?
+    @affiliation
+  end
 
-    def exist_department_users_custom_field
-      @exist_department_users_custom_field ||=
-        ! self.class.users_custom_fields_name_of_department.empty? &&
-        UserCustomField.where(name: self.class.users_custom_fields_name_of_department).count == 1
-    end
+  def get_affiliation
+    return '' unless exist_affiliation_users_custom_field
+    custom_values = CustomValue.
+                     joins(:custom_field).
+                     where(["#{CustomValue.table_name}.customized_id = ?", self.id]).
+                     where(["#{CustomValue.table_name}.customized_type = ?", 'Principal']).
+                     where(["#{CustomField.table_name}.type = ?", 'UserCustomField']).
+                     where(["#{CustomField.table_name}.name = ?", self.class.users_custom_field_name_of_affiliation])
+    return self.class.independent_affiliation if custom_values.blank? or custom_values.length != 1
+    custom_value = custom_values.first
+    return self.class.independent_affiliation if custom_value[:value].to_s.empty?
+    return custom_value[:value]
+  end
 
-    # 名前の略称
-    # * Redmineに同じ姓のユーザーが存在しない場合空白を返す
-    # * Redmineに同じ姓のユーザーが存在する場合
-    #   * 名前の1文字目が同じユーザーが存在しない場合、「'(' + 名前の1文字目 + ')' 」を返す
-    #   * 名前の1文字目が同じユーザーが存在する場合、諦めて名前を返す
-    def abbreviatedfirstname
-      return @abbreviatedfirstname if @abbreviatedfirstname
-      u = User
-      return @abbreviatedfirstname = '' if u.where(lastname: self[:lastname]).count == 1
-      return @abbreviatedfirstname = " (#{self[:firstname][0]})" if u.
-        where(lastname: self[:lastname]).
-        where(u.arel_table[:firstname].matches("#{self[:firstname][0]}%")).count == 1
-      @abbreviatedfirstname = " #{self[:firstname]}"
-    end
+  def exist_affiliation_users_custom_field
+    @exist_affiliation_users_custom_field ||=
+      ! self.class.users_custom_field_name_of_affiliation.empty? &&
+      UserCustomField.where(name: self.class.users_custom_field_name_of_affiliation).count == 1
+  end
 
+  private :get_affiliation, :exist_affiliation_users_custom_field
+
+  # 名前の略称
+  # * Redmineに同じ姓のユーザーが存在しない場合、空白を返す
+  # * Redmineに同じ姓のユーザーが存在する場合
+  #   * 名前の1文字目が同じユーザーが存在しない場合、「名前の前の文字列 + 名前の1文字目 + 名前の後の文字列 」を返す
+  #   * 名前の1文字目が同じユーザーが存在する場合、諦めて「名前」を返す
+  def abbreviated_firstname
+    return @abbreviated_firstname if @abbreviated_firstname
+    before = Setting.plugin_redmine_append_users_display_format['string_before_abbreviated_firstname'].to_s
+    after  = Setting.plugin_redmine_append_users_display_format['string_after_abbreviated_firstname'].to_s
+    afn = self.class.append_users_display_format_join_before_after_strings self[:firstname][0], before, after
+    return @abbreviated_firstname = afn if @force_abbreviated_firstname
+    return @abbreviated_firstname = self[:firstname] if self[:lastname].empty?
+    return @abbreviated_firstname = '' if self[:firstname].empty?
+    u = User
+    return @abbreviated_firstname = '' if u.where(lastname: self[:lastname]).count == 1
+    return @abbreviated_firstname = afn if
+      u.
+      where(lastname: self[:lastname]).
+      where(u.arel_table[:firstname].matches("#{self[:firstname][0]}%")).count == 1
+    @abbreviated_firstname = " #{self[:firstname]}"
+  end
+
+  def name(formatter = nil)
+    c = caller[0].to_s.split(':')
+    @force_abbreviated_firstname = 
+      (c.length == 3 && File.basename(c[0]) == 'settings_controller.rb' && c[2].include?('edit'))
+    @force_affiliation = @force_abbreviated_firstname
+    super(formatter).strip
   end
 
 end
 
-User.send :include, RedmineAppendUsersDisplayFormat::Patches::UserPatch
+User.prepend RedmineAppendUsersDisplayFormat::Patches::UserPatch
