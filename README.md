@@ -17,13 +17,13 @@ It can use users custom field of affiliation for users display. It also correspo
 
 ### Download
 
-* Change you current directory to your Redmine root directory
+* Change you current directory to your Redmine root directory.
 
 ```
   cd {REDMINE_ROOT}
 ```
 
-* Copy the plugin from GitHub using the following command
+* Copy the plugin from GitHub using the following command.
 
 ```
   git clone https://github.com/hironoda/redmine_append_users_display_format.git plugins/redmine_append_users_display_format
@@ -31,19 +31,19 @@ It can use users custom field of affiliation for users display. It also correspo
 
 ### Install
 
-* Run the following command to upgrade your database
+* Run the following command to upgrade your database.
 
 ```
 bundle exec rake redmine:plugins:migrate NAME=redmine_append_users_display_format RAILS_ENV=production
 ```
-* Restart Redmine
+* Restart Redmine.
 
 ### Configuration
 
 If you want to display the user's affiliation, make the following settings.
 
-* Set users custom fields name of affiliation
-* Make a users custom field with the name established by the configuration of plug-in
+1. Create a user custom field to set user affiliation.
+1. In the setting of the plugin, set the name of the custom field created in the previous item.
 
 ## Description
 
