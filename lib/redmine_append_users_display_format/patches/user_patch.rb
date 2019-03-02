@@ -259,8 +259,9 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
                      where(["#{CustomValue.table_name}.customized_type = ?", 'Principal']).
                      where(["#{CustomField.table_name}.type = ?", 'UserCustomField']).
                      where(["#{CustomField.table_name}.name = ?", self.class.users_custom_field_name_of_affiliation])
+    return self.class.independent_affiliation if custom_values.blank? or custom_values.length != 1
     custom_value = custom_values.first
-    return self.class.independent_affiliation if custom_values.length != 1 or custom_value[:value].to_s.empty?
+    return self.class.independent_affiliation if custom_value[:value].to_s.empty?
     return custom_value[:value]
   end
 
@@ -281,10 +282,13 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
     return @abbreviated_firstname if @abbreviated_firstname
     before = Setting.plugin_redmine_append_users_display_format['string_before_abbreviated_firstname'].to_s
     after  = Setting.plugin_redmine_append_users_display_format['string_after_abbreviated_firstname'].to_s
-    return @abbreviated_firstname = "#{before}#{self[:firstname][0]}#{after}" if @force_abbreviated_firstname
+    afn = self.class.append_users_display_format_join_before_after_strings self[:firstname][0], before, after
+    return @abbreviated_firstname = afn if @force_abbreviated_firstname
+    return @abbreviated_firstname = self[:firstname] if self[:lastname].empty?
+    return @abbreviated_firstname = '' if self[:firstname].empty?
     u = User
     return @abbreviated_firstname = '' if u.where(lastname: self[:lastname]).count == 1
-    return @abbreviated_firstname = "#{before}#{self[:firstname][0]}#{after}" if
+    return @abbreviated_firstname = afn if
       u.
       where(lastname: self[:lastname]).
       where(u.arel_table[:firstname].matches("#{self[:firstname][0]}%")).count == 1

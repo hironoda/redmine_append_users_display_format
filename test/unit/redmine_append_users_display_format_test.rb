@@ -119,6 +119,21 @@ class RedmineAppendUsersDisplayFormatTest < ActiveSupport::TestCase
     }
 
     testcases = [
+      {user_format: :firstname_lastname,                                  name: 'John'},
+      {user_format: :lastname_abbreviated_firstname,                      name: 'John'},
+      {user_format: :username_lastname_abbreviated_firstname,             name: '_john : John'},
+      {user_format: :affiliation_lastname_abbreviated_firstname,          name: '[Independent] John'},
+      {user_format: :username_affiliation_lastname_abbreviated_firstname, name: '_john : [Independent] John'},
+      {user_format: :affiliation_username_lastname_abbreviated_firstname, name: '[Independent] _john : John'},
+    ]
+    user_id = 11
+    u = User.find(user_id)
+    testcases.each{|t|
+      assert_equal t[:name], u.name(t[:user_format]),
+                   "user format : #{t[:user_format]}, user id : #{user_id}, custom field name : #{s}, independent affiliation : #{ia}"
+    }
+
+    testcases = [
       {user_format: :firstname_lastname,                                  name: 'Anonymous'},
       {user_format: :lastname_abbreviated_firstname,                      name: 'Anonymous'},
       {user_format: :username_lastname_abbreviated_firstname,             name: 'Anonymous'},
