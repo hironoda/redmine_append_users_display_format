@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_append_users_display_format do
   name 'Redmine Append Users Display Format plugin'
   author 'NODA Hiroyuki'
   description 'Append Users Display Format.'
-  version '0.0.2'
+  version '0.0.3'
   url 'https://github.com/hironoda/redmine_append_users_display_format'
 #  author_url 'http://example.com/about'
 
