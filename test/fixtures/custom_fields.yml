@@ -14,3 +14,33 @@ custom_fields_001:
   default_value: ""
   editable: true
   position: 1
+custom_fields_002:
+  name: Department
+  regexp: ""
+  is_for_all: false
+  type: GroupCustomField
+  possible_values:
+  - Development
+  - Test
+  - Affairs
+  id: 2
+  is_required: false
+  field_format: list
+  default_value: ""
+  editable: true
+  position: 1
+custom_fields_003:
+  name: Department
+  regexp: ""
+  is_for_all: false
+  type: ProjectCustomField
+  possible_values:
+  - Development
+  - Test
+  - Affairs
+  id: 3
+  is_required: false
+  field_format: list
+  default_value: ""
+  editable: true
+  position: 1

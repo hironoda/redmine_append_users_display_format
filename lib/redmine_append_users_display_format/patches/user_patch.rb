@@ -266,9 +266,14 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
   end
 
   def exist_affiliation_users_custom_field
+    tbl_name = UserCustomField.table_name
+    type = 'UserCustomField'
+    query = [ "SELECT COUNT(*) FROM #{tbl_name} WHERE #{tbl_name}.name = :name AND #{tbl_name}.type IN (:type)",
+              name: self.class.users_custom_field_name_of_affiliation,
+              type: type ]
     @exist_affiliation_users_custom_field ||=
       ! self.class.users_custom_field_name_of_affiliation.empty? &&
-      UserCustomField.where(name: self.class.users_custom_field_name_of_affiliation).count == 1
+      UserCustomField.count_by_sql(query) == 1
   end
 
   private :get_affiliation, :exist_affiliation_users_custom_field
@@ -280,20 +285,34 @@ module RedmineAppendUsersDisplayFormat::Patches::UserPatch
   #   * 名前の1文字目が同じユーザーが存在する場合、諦めて「名前」を返す
   def abbreviated_firstname
     return @abbreviated_firstname if @abbreviated_firstname
-    before = Setting.plugin_redmine_append_users_display_format['string_before_abbreviated_firstname'].to_s
-    after  = Setting.plugin_redmine_append_users_display_format['string_after_abbreviated_firstname'].to_s
-    afn = self.class.append_users_display_format_join_before_after_strings self[:firstname][0], before, after
-    return @abbreviated_firstname = afn if @force_abbreviated_firstname
+    return @abbreviated_firstname = first_character_of_firstname if @force_abbreviated_firstname
     return @abbreviated_firstname = self[:firstname] if self[:lastname].empty?
     return @abbreviated_firstname = '' if self[:firstname].empty?
     u = User
-    return @abbreviated_firstname = '' if u.where(lastname: self[:lastname]).count == 1
-    return @abbreviated_firstname = afn if
-      u.
-      where(lastname: self[:lastname]).
-      where(u.arel_table[:firstname].matches("#{self[:firstname][0]}%")).count == 1
+    tbl_name = u.table_name
+    type = 'User'
+    query = [ "SELECT COUNT(*) FROM #{tbl_name} WHERE #{tbl_name}.lastname = :lastname AND #{tbl_name}.type IN (:type)",
+              lastname: self[:lastname],
+              type: type ]
+    return @abbreviated_firstname = '' if u.count_by_sql(query) == 1
+    sql = ''
+    sql << "SELECT COUNT(*) FROM #{tbl_name} WHERE #{tbl_name}.lastname = :lastname AND #{tbl_name}.firstname LIKE :firstname"
+    sql << " AND #{tbl_name}.type IN (:type)"
+    query = [ sql, 
+              lastname:  self[:lastname],
+              firstname: "#{self[:firstname][0]}%",
+              type: type ]
+    return @abbreviated_firstname = first_character_of_firstname if u.count_by_sql(query) == 1
     @abbreviated_firstname = " #{self[:firstname]}"
   end
+
+  def first_character_of_firstname
+    before = Setting.plugin_redmine_append_users_display_format['string_before_abbreviated_firstname'].to_s
+    after  = Setting.plugin_redmine_append_users_display_format['string_after_abbreviated_firstname'].to_s
+    self.class.append_users_display_format_join_before_after_strings self[:firstname][0], before, after
+  end
+
+  private :first_character_of_firstname
 
   def name(formatter = nil)
     c = caller[0].to_s.split(':')
