@@ -49,7 +49,7 @@ If you want to display the user's affiliation, make the following settings.
 
 ### Format for Japan
 
-The last some of the users display format choices are for Japanese, display the name as follows.
+The last some of the users display format of the plugin setting is for Japanese, and the name is displayed as follows.
 
 1. If there is not users with the same last name, only the last name is displayed. (e.g. Noda)
 1. If there is users with the same last name, but the first letter of the first name is not the same, the last name and the first letter of the first is displayed. (e.g. Noda(H))

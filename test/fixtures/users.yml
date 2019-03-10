@@ -156,3 +156,9 @@ users_011:
   mail_notification: all
   login: john
   type: User
+groups_012:
+  id: 12
+  lastname: Smith
+  firstname: John
+  type: Group
+  status: 1
