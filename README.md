@@ -6,7 +6,7 @@ It can use users custom field of affiliation for users display. It also correspo
 
 ## Version
 
-0.0.2
+0.0.3
 
 ## Environment
 
@@ -20,13 +20,13 @@ It can use users custom field of affiliation for users display. It also correspo
 * Change you current directory to your Redmine root directory.
 
 ```
-  cd {REDMINE_ROOT}
+cd {REDMINE_ROOT}
 ```
 
 * Copy the plugin from GitHub using the following command.
 
 ```
-  git clone https://github.com/hironoda/redmine_append_users_display_format.git plugins/redmine_append_users_display_format
+git clone https://github.com/hironoda/redmine_append_users_display_format.git plugins/redmine_append_users_display_format
 ```
 
 ### Install
@@ -56,6 +56,10 @@ The last some of the users display format of the plugin setting is for Japanese,
 1. In other cases, the first and last names are displayed. (e.g. Noda Hiroyuki)
 
 ## Changelog
+
+### 0.0.3
+
+* Processing improvement
 
 ### 0.0.2
 
